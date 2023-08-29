@@ -32,7 +32,7 @@ const RecentWorkouts = ({ limit }) => {
     return null;
   }
 
-  workouts = data?.workouts.map((workout, index) => (
+  workouts = data?.workouts.map((workout) => (
     <WorkoutCard
       workout={workout}
       user={workout.user}
@@ -40,6 +40,10 @@ const RecentWorkouts = ({ limit }) => {
       key={workout.id}
     />
   ));
+
+  if (!workouts.length) {
+    return <></>;
+  }
 
   return (
     <div className='mb-20'>
