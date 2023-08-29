@@ -118,35 +118,6 @@ const Leaderboard = () => {
                   Round 1
                 </div>
               </Tab>
-              <Tab
-                className={({ selected }) =>
-                  classNames(
-                    'hover:bg-gray-200 rounded-sm p-4 hover:font-medium hover:border-black/75 transition-all min-w-fit px-9 md:px-10 ',
-                    selected
-                      ? 'font-medium border-b-2 border-black'
-                      : 'text-gray-600'
-                  )
-                }
-              >
-                <div className='flex flex-row items-center justify-center gap-2'>
-                  Round 2
-                </div>
-              </Tab>
-              <Tab
-                disabled
-                className={({ selected }) =>
-                  classNames(
-                    'cursor-not-allowed hover:bg-gray-200 rounded-sm p-4 hover:font-medium hover:border-black/75 transition-all min-w-fit px-9 md:px-10',
-                    selected
-                      ? 'font-medium border-b-2 border-black'
-                      : 'text-gray-600'
-                  )
-                }
-              >
-                <div className='flex flex-row items-center justify-center gap-2'>
-                  Round 3
-                </div>
-              </Tab>
             </Tab.List>
             <Tab.Panels>
               <Tab.Panel>
