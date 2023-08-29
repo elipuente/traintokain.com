@@ -97,14 +97,14 @@ const Container = (props) => {
         <link
           rel='icon'
           type='image/png'
-          sizes='32x32'
-          href='/favicons/favicon-32x32.png'
+          sizes='384x384'
+          href='/favicons/icons/icon-384x384.png'
         />
         <link
           rel='icon'
           type='image/png'
-          sizes='16x16'
-          href='/favicons/favicon-16x16.png'
+          sizes='192x192'
+          href='/favicons/icons/icon-192x192.png'
         />
         <link href='/manifest.json' rel='manifest' />
         <link
