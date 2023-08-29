@@ -1,11 +1,11 @@
 export const workoutTypes = [
   {
     name: 'Walking',
-    ppmValue: 0.5,
+    ppmValue: 0.33,
   },
   {
     name: 'Running',
-    ppmValue: 1,
+    ppmValue: 0.85,
   },
   {
     name: 'Hiking',
@@ -21,11 +21,11 @@ export const workoutTypes = [
   },
   {
     name: 'Weightlifting',
-    ppmValue: 0.75,
+    ppmValue: 0.7,
   },
   {
     name: 'Yoga',
-    ppmValue: 0.5,
+    ppmValue: 0.33,
   },
   {
     name: 'Golf',
@@ -37,14 +37,14 @@ export const workoutTypes = [
   },
   {
     name: 'Swimming',
-    ppmValue: 0.75,
+    ppmValue: 0.85,
   },
   {
     name: 'Pilates',
-    ppmValue: 0.72,
+    ppmValue: 0.78,
   },
   {
     name: 'Other',
-    ppmValue: 0.75,
+    ppmValue: 0.45,
   },
 ];
