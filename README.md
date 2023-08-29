@@ -7,8 +7,8 @@ Anyone can view the current standings and previously entered user workouts witho
 ### Running Locally
 
 ```bash
-$ git clone https://github.com/elipuente/fitness-challenge.git
-$ cd fitness-challenge
+$ git clone git@github.com:elipuente/traintokain.com.git
+$ cd traintokain.com
 $ npm i
 $ npm run dev
 ```
