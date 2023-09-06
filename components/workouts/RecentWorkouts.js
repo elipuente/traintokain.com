@@ -13,22 +13,7 @@ const RecentWorkouts = ({ limit }) => {
     { refreshInterval: 30_000 }
   );
 
-  if (!data) {
-    return (
-      <div className='mb-20'>
-        <h2 className='text-4xl tracking-tight font-extrabold text-gray-600 sm:text-5xl'>
-          Recent Workouts
-        </h2>
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mt-6 justify-items-center'>
-          {[...Array(limit)].map((_, index) => (
-            <WorkoutCardSkeleton key={index} />
-          ))}
-        </div>
-      </div>
-    );
-  }
-
-  if (error || data?.error) {
+  if (error || data?.error || !data) {
     return null;
   }
 
@@ -42,7 +27,7 @@ const RecentWorkouts = ({ limit }) => {
   ));
 
   if (!workouts.length) {
-    return <></>;
+    return null;
   }
 
   return (
