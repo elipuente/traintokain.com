@@ -1,7 +1,6 @@
 import useSWR from 'swr';
 
 import WorkoutCard from './WorkoutCard';
-import WorkoutCardSkeleton from './WorkoutCardSkeleton';
 
 import { fetcher } from '../../utils/fetcher';
 
