@@ -58,16 +58,18 @@ const SignInForm = () => {
         last,
         number,
       }),
-    }).then((data) => data.json());
+    });
 
-    if (res?.accessToken) {
-      setUser(res.user);
-      setAccessToken(res.accessToken);
+    const data = await res.json();
+
+    if (data?.accessToken) {
+      setUser(data.user);
+      setAccessToken(data.accessToken);
       setLoading(false);
       router.push('/leaderboard');
     } else {
       setLoading(false);
-      setError(res.message);
+      setError(data.message);
     }
   };
 

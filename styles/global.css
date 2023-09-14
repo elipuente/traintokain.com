@@ -4,7 +4,7 @@
 
 html,
 body {
-  overflow: unset!important; /* temporarily fix vaul overflow bug */
+  overflow: unset!important;
   @apply text-gray-900;
   padding: 0;
   margin: 0;
@@ -137,13 +137,12 @@ a {
 }
 
 @layer utilities {
-  /* Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
 
   .no-scrollbar {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }

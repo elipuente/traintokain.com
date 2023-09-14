@@ -94,17 +94,19 @@ const WorkoutLikes = ({ totalLikes, workoutId }) => {
           user,
           intent: 'like',
         }),
-      }).then((data) => data.json());
+      });
 
-      if (res?.success) {
+      const likeRequestData = await res.json();
+
+      if (likeRequestData?.success) {
         data?.likes.push({
           user: {
             firstName: user.firstName,
             lastName: user.lastName,
           },
-          ...res.newLike,
+          ...likeRequestData.newLike,
         });
-        setMatchingUserLike([res.newLike]);
+        setMatchingUserLike([likeRequestData.newLike]);
       } else {
         setUserLikedWorkout(false);
       }
@@ -136,9 +138,11 @@ const WorkoutLikes = ({ totalLikes, workoutId }) => {
         user,
         intent: 'unlike',
       }),
-    }).then((data) => data.json());
+    });
 
-    if (res?.success) {
+    const unlikeRequestData = await res.json();
+
+    if (unlikeRequestData?.success) {
       if (data?.likes) {
         data.likes = data.likes.filter(
           ({ id }) => id !== matchingUserLike?.[0].id
