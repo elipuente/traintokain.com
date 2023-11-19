@@ -259,7 +259,7 @@ const AddWorkoutForm = ({
               )}
             </button>
           </div>
-          {Math.random() > 0.9 && !!encodedImage && (
+          {Math.random() > 0.9 && !encodedImage && (
             <p className='text-xs'>Try adding a picture to your workout!</p>
           )}
         </form>
