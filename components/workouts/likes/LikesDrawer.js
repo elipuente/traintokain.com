@@ -10,8 +10,8 @@ const LikesDrawer = ({ likes, text }) => (
     </Drawer.Trigger>
     <Drawer.Portal>
       <Drawer.Overlay className='fixed inset-0 bg-black/40' />
-      <Drawer.Content className='bg-zinc-100 flex flex-col rounded-t-xl mt-24 fixed bottom-0 left-0 right-0'>
-        <div className='p-4 bg-white rounded-t-xl flex-1 pb-8'>
+      <Drawer.Content className='bg-zinc-100 flex flex-col rounded-t-xl mt-24 fixed bottom-0 left-0 right-0 max-h-[85%]'>
+        <div className='p-4 bg-white rounded-t-xl flex-1 pb-8 overflow-y-scroll no-scrollbar'>
           <div className='mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-zinc-300 mb-8' />
           <div className='max-w-md mx-auto mb-8'>
             <div className='flex flex-row items-center justify-between'>
@@ -45,6 +45,7 @@ const LikesDrawer = ({ likes, text }) => (
               ))}
             </div>
           </div>
+          <div className='block fixed h-14 bottom-0 left-0 right-0 z-50 bg-gradient-to-t from-white' />
         </div>
       </Drawer.Content>
     </Drawer.Portal>
