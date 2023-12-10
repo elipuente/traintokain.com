@@ -44,6 +44,14 @@ export const workoutTypes = [
     ppmValue: 0.78,
   },
   {
+    name: 'Bowling',
+    ppmValue: 0.15,
+  },
+  {
+    name: 'Elliptical',
+    ppmValue: 0.65,
+  },
+  {
     name: 'Other',
     ppmValue: 0.45,
   },
