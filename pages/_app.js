@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 import '../styles/global.css';
 
@@ -52,6 +53,7 @@ const FitnessCompetition = ({ Component, pageProps }) => {
     <ProvideUser>
       <Component {...pageProps} />
       <Analytics />
+      <SpeedInsights />
     </ProvideUser>
   );
 };
