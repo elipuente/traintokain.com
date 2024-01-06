@@ -35,6 +35,16 @@ const Home = () => {
                   }`
                 : 'Welcome to the Train to Kain Fitness Competition. Sign in to start competing.'}
             </p>
+            <p className='my-3 text-gray-500 sm:mt-5 text-lg sm:max-w-md sm:mx-auto md:mt-5 md:text-xl lg:mx-0'>
+              Congratulations to{' '}
+              <Link
+                className='font-semibold text-t2kTeal'
+                href={'/user/cdad511c-8d24-43e5-98a5-1e8c6f0e2072/workouts'}
+              >
+                Matt Southards
+              </Link>{' '}
+              for winning Round One! Round Two starts on January 12th.
+            </p>
             <div className='mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start'>
               <div className='rounded-md shadow'>
                 {signedIn ? (

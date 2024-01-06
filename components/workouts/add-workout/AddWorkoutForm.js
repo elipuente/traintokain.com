@@ -241,11 +241,12 @@ const AddWorkoutForm = ({
             <button
               type='submit'
               disabled={loading || sessionEnded}
-              className={`group relative flex justify-end py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-t2kTeal hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500
-                ${
-                  sessionEnded &&
-                  'bg-gray-600 hover:bg-gray-700 focus:ring-gray-500 cursor-not-allowed'
-                }`}
+              className={classNames(
+                sessionEnded
+                  ? 'bg-gray-600 hover:bg-gray-700 focus:ring-gray-500 cursor-not-allowed'
+                  : 'bg-t2kTeal hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500',
+                'group relative flex justify-end py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white'
+              )}
             >
               <span className='absolute inset-y-0 flex items-center pl-3'></span>
               {loading ? (
@@ -253,7 +254,7 @@ const AddWorkoutForm = ({
                   <LoadingSpinner color='text-white' /> {'Adding Workout...'}
                 </>
               ) : sessionEnded ? (
-                'Session Ended'
+                'Round Ended'
               ) : (
                 'Add Workout'
               )}

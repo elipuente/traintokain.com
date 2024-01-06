@@ -7,6 +7,7 @@ import Errors from '../components/Errors';
 import LeaderTable from '../components/leaderboard/LeaderTable';
 import TextLink from '../components/TextLink';
 
+import { roundOne } from '../data/leaderboardSnapshot';
 import { fetcher } from '../utils/fetcher';
 import { useUser } from '../utils/user';
 
@@ -45,7 +46,29 @@ const Leaderboard = () => {
                         className='relative inline-flex rounded-full h-2 w-2 bg-t2kTeal'
                         title='In Progress'
                       >
-                        <span className='animate-slow-ping inline-flex h-2 w-2 rounded-full bg-t2kTeal/75 '></span>
+                        <span className='animate-slow-ping inline-flex h-2 w-2 rounded-full bg-t2kTeal/75'></span>
+                      </span>
+                    </div>
+                    <div className='animate-pulse h-5 w-20 bg-gray-200 rounded-md'></div>
+                  </div>
+                </Tab>
+                <Tab
+                  className={({ selected }) =>
+                    classNames(
+                      'hover:bg-gray-200 rounded-sm p-4 hover:font-medium hover:border-black/75 transition-all min-w-fit px-9 md:px-10',
+                      selected
+                        ? 'font-medium border-b-2 border-black'
+                        : 'text-gray-600'
+                    )
+                  }
+                >
+                  <div className='flex flex-row items-center justify-center gap-2'>
+                    <div className='flex flex-row h-2 w-2'>
+                      <span
+                        className='relative inline-flex rounded-full h-2 w-2 bg-t2kTeal'
+                        title='In Progress'
+                      >
+                        <span className='animate-slow-ping inline-flex h-2 w-2 rounded-full bg-t2kTeal/75'></span>
                       </span>
                     </div>
                     <div className='animate-pulse h-5 w-20 bg-gray-200 rounded-md'></div>
@@ -54,7 +77,10 @@ const Leaderboard = () => {
               </Tab.List>
               <Tab.Panels>
                 <Tab.Panel>
-                  <LeaderTable data={data} />
+                  <LeaderTable />
+                </Tab.Panel>
+                <Tab.Panel>
+                  <LeaderTable />
                 </Tab.Panel>
               </Tab.Panels>
             </Tab.Group>
@@ -94,7 +120,7 @@ const Leaderboard = () => {
           )}
         </p>
         <div className='md:px-8 pb-12 md:pb-0'>
-          <Tab.Group>
+          <Tab.Group defaultIndex={1}>
             <Tab.List className='flex flex-row items-center border-b-[1px] overflow-x-scroll md:overflow-hidden max-w-full no-scrollbar my-4 md:mt-10'>
               <Tab
                 className={({ selected }) =>
@@ -109,27 +135,43 @@ const Leaderboard = () => {
                 <div className='flex flex-row items-center justify-center gap-2'>
                   <div className='flex flex-row h-2 w-2'>
                     <span
-                      className='relative inline-flex rounded-full h-2 w-2 bg-t2kTeal'
-                      title='In Progress'
-                    >
-                      <span className='animate-slow-ping inline-flex h-2 w-2 rounded-full bg-t2kTeal/75 '></span>
-                    </span>
+                      className='relative inline-flex rounded-full h-2 w-2 bg-gray-300'
+                      title='Round Ended'
+                    />
                   </div>
                   Round 1
+                </div>
+              </Tab>
+              <Tab
+                className={({ selected }) =>
+                  classNames(
+                    'hover:bg-gray-200 rounded-sm p-4 hover:font-medium hover:border-black/75 transition-all min-w-fit px-9 md:px-10',
+                    selected
+                      ? 'font-medium border-b-2 border-black'
+                      : 'text-gray-600'
+                  )
+                }
+              >
+                <div className='flex flex-row items-center justify-center gap-2'>
+                  <div className='flex flex-row h-2 w-2'>
+                    <span
+                      className='relative inline-flex rounded-full h-2 w-2 bg-gray-300'
+                      title='Round Not Started'
+                    />
+                  </div>
+                  Round 2
                 </div>
               </Tab>
             </Tab.List>
             <Tab.Panels>
               <Tab.Panel>
+                <LeaderTable data={roundOne} />
+              </Tab.Panel>
+              <Tab.Panel>
+                <p className='my-2 italic text-gray-700'>
+                  Round 2 starts on January 12th.
+                </p>
                 <LeaderTable data={data} />
-              </Tab.Panel>
-              <Tab.Panel>
-                Round 2 has not started.
-                <LeaderTable />
-              </Tab.Panel>
-              <Tab.Panel>
-                <h3>Round 3 has not started.</h3>
-                <LeaderTable />
               </Tab.Panel>
             </Tab.Panels>
           </Tab.Group>
