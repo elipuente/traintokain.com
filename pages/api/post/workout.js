@@ -65,6 +65,11 @@ const handler = async (req, res) => {
     return res.status(400).json({ error: true });
   }
 
+  return res.status(500).json({
+    error: true,
+    message: 'Round One has ended.',
+  });
+
   const { workout, encodedImage, user } = req.body;
 
   if (!authUser(user, req).verifiedUser) {
