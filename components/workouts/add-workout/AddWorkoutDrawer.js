@@ -45,7 +45,6 @@ const AddWorkoutDrawer = ({
                 <AddWorkoutForm
                   setCloseWorkoutDrawer={setCloseWorkoutDrawer}
                   setAddWorkoutActive={setAddWorkoutActive}
-                  sessionEnded
                 />
               </div>
             </div>

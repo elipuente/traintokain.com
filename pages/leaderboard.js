@@ -7,6 +7,7 @@ import Errors from '../components/Errors';
 import LeaderTable from '../components/leaderboard/LeaderTable';
 import TextLink from '../components/TextLink';
 
+import { disabledUsers } from '../data/disabledUsers';
 import { roundOne } from '../data/leaderboardSnapshot';
 import { fetcher } from '../utils/fetcher';
 import { useUser } from '../utils/user';
@@ -95,6 +96,7 @@ const Leaderboard = () => {
   }
 
   const userIsFirst = signedIn && data[0].id === user.id;
+  const activeUsers = data.filter(({ id }) => !disabledUsers.includes(id));
 
   return (
     <Container title='Leaderboard'>
@@ -155,9 +157,11 @@ const Leaderboard = () => {
                 <div className='flex flex-row items-center justify-center gap-2'>
                   <div className='flex flex-row h-2 w-2'>
                     <span
-                      className='relative inline-flex rounded-full h-2 w-2 bg-gray-300'
-                      title='Round Not Started'
-                    />
+                      className='relative inline-flex rounded-full h-2 w-2 bg-t2kTeal'
+                      title='In Progress'
+                    >
+                      <span className='animate-slow-ping inline-flex h-2 w-2 rounded-full bg-t2kTeal/75' />
+                    </span>
                   </div>
                   Round 2
                 </div>
@@ -168,10 +172,7 @@ const Leaderboard = () => {
                 <LeaderTable data={roundOne} />
               </Tab.Panel>
               <Tab.Panel>
-                <p className='my-2 italic text-gray-700'>
-                  Round 2 starts on January 12th.
-                </p>
-                <LeaderTable data={data} />
+                <LeaderTable data={activeUsers} />
               </Tab.Panel>
             </Tab.Panels>
           </Tab.Group>
