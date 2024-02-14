@@ -1,0 +1,11 @@
+const sessionEnd = new Date(2024, 1, 17);
+
+export const getRemainingDays = () => {
+  console.log('sessionEnd :>> ', sessionEnd);
+
+  return Math.ceil(
+    (sessionEnd.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24)
+  );
+};
+
+export const isSessionOver = () => getRemainingDays() <= 0;

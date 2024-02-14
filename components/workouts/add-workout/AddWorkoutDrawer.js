@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import AddWorkoutForm from './AddWorkoutForm';
 
+import { isSessionOver } from '../../../utils/session';
 import { useUser } from '../../../utils/user';
 
 const AddWorkoutDrawer = ({
@@ -43,6 +44,7 @@ const AddWorkoutDrawer = ({
               </div>
               <div className='max-w-2xl w-full self-center'>
                 <AddWorkoutForm
+                  sessionEnded={isSessionOver()}
                   setCloseWorkoutDrawer={setCloseWorkoutDrawer}
                   setAddWorkoutActive={setAddWorkoutActive}
                 />

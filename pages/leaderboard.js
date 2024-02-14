@@ -10,6 +10,7 @@ import TextLink from '../components/TextLink';
 import { disabledUsers } from '../data/disabledUsers';
 import { roundOne } from '../data/leaderboardSnapshot';
 import { fetcher } from '../utils/fetcher';
+import { isSessionOver } from '../utils/session';
 import { useUser } from '../utils/user';
 
 const classNames = (...classes) => classes.filter(Boolean).join(' ');
@@ -156,12 +157,19 @@ const Leaderboard = () => {
               >
                 <div className='flex flex-row items-center justify-center gap-2'>
                   <div className='flex flex-row h-2 w-2'>
-                    <span
-                      className='relative inline-flex rounded-full h-2 w-2 bg-t2kTeal'
-                      title='In Progress'
-                    >
-                      <span className='animate-slow-ping inline-flex h-2 w-2 rounded-full bg-t2kTeal/75' />
-                    </span>
+                    {isSessionOver() ? (
+                      <span
+                        className='relative inline-flex rounded-full h-2 w-2 bg-gray-300'
+                        title='Round Ended'
+                      />
+                    ) : (
+                      <span
+                        className='relative inline-flex rounded-full h-2 w-2 bg-t2kTeal'
+                        title='In Progress'
+                      >
+                        <span className='animate-slow-ping inline-flex h-2 w-2 rounded-full bg-t2kTeal/75' />
+                      </span>
+                    )}
                   </div>
                   Round 2
                 </div>

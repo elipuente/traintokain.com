@@ -2,6 +2,7 @@ import prisma from '../../../lib/prisma';
 import cloudinary from '../../../lib/cloudinary';
 import { authUser } from '../../../services/auth/auth-service';
 import { unableToVerify, genericError } from '../helpers';
+import { isSessionOver } from '../../../utils/session';
 
 const calculateScore = ({ minutes, ppmValue }) =>
   Math.round(minutes * ppmValue);
@@ -63,6 +64,13 @@ const handler = async (req, res) => {
 
   if (req.method !== 'POST') {
     return res.status(400).json({ error: true });
+  }
+
+  if (isSessionOver()) {
+    return res.status(500).json({
+      error: true,
+      message: 'Round Two has ended.',
+    });
   }
 
   const { workout, encodedImage, user } = req.body;

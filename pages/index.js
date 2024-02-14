@@ -9,11 +9,14 @@ import cassieRyanBoat from '../public/images/cassieRyanBoat.webp';
 import Container from '../components/Container';
 import AddHomeScreenPrompt from '../components/AddHomeScreenPrompt';
 import RecentWorkouts from '../components/workouts/RecentWorkouts';
+import { getRemainingDays, isSessionOver } from '../utils/session';
 import { useUser } from '../utils/user';
 
 const Home = () => {
   const { user, signedIn } = useUser();
   const [loading, setLoading] = useState(true);
+
+  const remainingDays = getRemainingDays();
 
   return (
     <Container>
@@ -25,7 +28,9 @@ const Home = () => {
               <span className='block text-t2kTeal'>Competition</span>
             </h1>
             <p className='my-3 text-gray-500 sm:mt-5 text-lg sm:max-w-md sm:mx-auto md:mt-5 md:text-xl lg:mx-0'>
-              {signedIn
+              {isSessionOver()
+                ? 'Thanks for competing in the Train to Kain Fitness Competition. See you in Jamaica! 🇯🇲'
+                : signedIn
                 ? `Welcome back, ${user.firstName}! Your current score is ${
                     user.totalScore
                   }. ${
@@ -33,7 +38,12 @@ const Home = () => {
                       ? "Let's get those points up by adding another workout."
                       : 'Get started by adding a workout!'
                   }`
-                : 'Welcome to the Train to Kain Fitness Competition. Sign in to start competing.'}
+                : 'Welcome to the Train to Kain Fitness Competition. Sign in to start competing.'}{' '}
+              {remainingDays > 1
+                ? `Only ${remainingDays} days left to Train to Kain.`
+                : remainingDays === 1
+                ? 'Today is the last day of Train to Kain. Make it count!'
+                : null}
             </p>
             <div className='mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start'>
               <div className='rounded-md shadow'>
