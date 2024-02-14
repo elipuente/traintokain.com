@@ -39,12 +39,15 @@ const Home = () => {
                       : 'Get started by adding a workout!'
                   }`
                 : 'Welcome to the Train to Kain Fitness Competition. Sign in to start competing.'}{' '}
-              {remainingDays > 1
-                ? `Only ${remainingDays} days left to Train to Kain.`
-                : remainingDays === 1
-                ? 'Today is the last day of Train to Kain. Make it count!'
-                : null}
+              {remainingDays > 1 ? (
+                <span className='font-semibold'>{`Only ${remainingDays} days left to Train to Kain.`}</span>
+              ) : remainingDays === 1 ? (
+                <span className='font-semibold'>
+                  Today is the last day of Train to Kain. Make it count!
+                </span>
+              ) : null}
             </p>
+
             <div className='mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start'>
               <div className='rounded-md shadow'>
                 {signedIn ? (
