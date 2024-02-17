@@ -1,11 +1,11 @@
 import Image from 'next/image';
 
 import { AddAppIcon, ShareIcon } from '../icons';
+import { get, set } from '../utils/localstorage';
+
 import DrawerOverlay from './DrawerOverlay';
 
 import appIcon from '../public/images/appIcon.png';
-
-import { get, set } from '../utils/localstorage';
 
 const getMobileOperatingSystem = () => {
   if (window.matchMedia('(display-mode: standalone)').matches) {

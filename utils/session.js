@@ -1,4 +1,4 @@
-const sessionEnd = new Date(2024, 1, 17);
+const sessionEnd = new Date(2024, 1, 16);
 
 export const getRemainingDays = () =>
   Math.ceil(

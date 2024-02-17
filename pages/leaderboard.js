@@ -105,23 +105,32 @@ const Leaderboard = () => {
         <h1 className='text-t2kTeal font-extrabold text-4xl tracking-tight sm:text-5xl md:text-6xl'>
           Leaderboard
         </h1>
-        <p className='mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl md:mt-5 md:text-xl lg:mx-0'>
-          Currently, {userIsFirst ? 'you are' : `${data[0].firstName} is`} in
-          first place with a total score of {data[0].totalScore}.{' '}
-          {signedIn ? (
-            userIsFirst ? (
-              'Nice job, keep it up by adding another workout!'
+        {isSessionOver() ? (
+          <p className='mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl md:mt-5 md:text-xl lg:mx-0'>
+            Congratulations {userIsFirst ? '' : `to ${data[0].firstName}`} for
+            winning the Train to Kain Fitness Competition with a total score of{' '}
+            {data[0].totalScore}!
+          </p>
+        ) : (
+          <p className='mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl md:mt-5 md:text-xl lg:mx-0'>
+            Currently, {userIsFirst ? 'you are' : `${data[0].firstName} is`} in
+            first place with a total score of {data[0].totalScore}.{' '}
+            {signedIn ? (
+              userIsFirst ? (
+                'Nice job, keep it up by adding another workout!'
+              ) : (
+                'Try and catch up by adding another workout!'
+              )
             ) : (
-              'Try and catch up by adding another workout!'
-            )
-          ) : (
-            <>
-              {'Join the competition by '}
-              <TextLink href={`/user/login`} text='signing in'></TextLink>
-              {' and adding your workout.'}
-            </>
-          )}
-        </p>
+              <>
+                {'Join the competition by '}
+                <TextLink href={`/user/login`} text='signing in'></TextLink>
+                {' and adding your workout.'}
+              </>
+            )}
+          </p>
+        )}
+
         <div className='md:px-8 pb-12 md:pb-0'>
           <Tab.Group defaultIndex={1}>
             <Tab.List className='flex flex-row items-center border-b-[1px] overflow-x-scroll md:overflow-hidden max-w-full no-scrollbar my-4 md:mt-10'>

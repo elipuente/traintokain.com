@@ -66,12 +66,12 @@ const handler = async (req, res) => {
     return res.status(400).json({ error: true });
   }
 
-  // if (isSessionOver()) {
-  //   return res.status(500).json({
-  //     error: true,
-  //     message: 'Round Two has ended.',
-  //   });
-  // }
+  if (isSessionOver()) {
+    return res.status(500).json({
+      error: true,
+      message: 'Round Two has ended.',
+    });
+  }
 
   const { workout, encodedImage, user } = req.body;
 

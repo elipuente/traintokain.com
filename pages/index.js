@@ -1,8 +1,9 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import confetti from 'canvas-confetti';
 
 import { Drawer } from 'vaul';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import cassieRyanBoat from '../public/images/cassieRyanBoat.webp';
 
@@ -12,9 +13,106 @@ import RecentWorkouts from '../components/workouts/RecentWorkouts';
 import { getRemainingDays, isSessionOver } from '../utils/session';
 import { useUser } from '../utils/user';
 
+const launchConfetti = (secretConfetti) => {
+  const addSecretConfetti = (secretConfetti) =>
+    secretConfetti
+      ? {
+          scalar: 1.25,
+          colors: ['#009B3A', '#FED100', '#000000'],
+        }
+      : {};
+
+  const launch = (particleRatio, opts) => {
+    confetti({
+      ...opts,
+      angle: 80,
+      origin: {
+        x: 0,
+        y: 1,
+      },
+      particleCount: Math.floor(200 * particleRatio),
+      ...addSecretConfetti(secretConfetti),
+    });
+    confetti({
+      ...opts,
+      angle: 100,
+      origin: {
+        x: 1,
+        y: 1,
+      },
+      particleCount: Math.floor(200 * particleRatio),
+      ...addSecretConfetti(secretConfetti),
+    });
+  };
+
+  launch(0.25, {
+    spread: 26,
+    startVelocity: 55,
+  });
+  launch(0.2, {
+    spread: 60,
+  });
+  launch(0.35, {
+    spread: 100,
+    decay: 0.91,
+    scalar: 0.8,
+  });
+  launch(0.1, {
+    spread: 120,
+    startVelocity: 25,
+    decay: 0.92,
+    scalar: 1.2,
+  });
+  launch(0.1, {
+    spread: 120,
+    startVelocity: 45,
+  });
+};
+
+const getRandomJamaicanSaying = () => {
+  const randomSayings = [
+    'Wah Gwaan?',
+    'Yah Mon!',
+    'Mi Soon Come',
+    'Big Tings',
+    'Weh Yuh Ah Seh?',
+    'Boonoonoonoos',
+    'Small Up Yuhself',
+    'Mi Irie',
+    'Weh Yuh Deh Pon?',
+    'Dead Wid Laugh',
+    'Inna Di Morrows',
+    'Inner Luv',
+    'Blabba Mout',
+    'Big Mon Tings',
+  ];
+  const randomIndex = Math.floor(Math.random() * (randomSayings.length - 1));
+
+  return randomSayings[randomIndex];
+};
+
 const Home = () => {
   const { user, signedIn } = useUser();
   const [loading, setLoading] = useState(true);
+  const [count, setCount] = useState(0);
+  const [saying, setSaying] = useState('Yah Mon!');
+
+  useEffect(() => {
+    if (count === 0) {
+      launchConfetti();
+    }
+  }, [count]);
+
+  const handleConfettiLaunch = () => {
+    if (count === 4) {
+      confetti.reset();
+    }
+
+    const shouldLaunchSecretConfetti = count >= 4;
+
+    launchConfetti(shouldLaunchSecretConfetti);
+    count < 5 ? setCount(count + 1) : setSaying(getRandomJamaicanSaying());
+  };
 
   const remainingDays = getRemainingDays();
 
@@ -27,9 +125,20 @@ const Home = () => {
               <span className='block'>Join the</span>{' '}
               <span className='block text-t2kTeal'>Competition</span>
             </h1>
-            <p className='my-3 text-gray-500 sm:mt-5 text-lg sm:max-w-md sm:mx-auto md:mt-5 md:text-xl lg:mx-0'>
+            {isSessionOver() ? (
+              <button
+                className='mt-4 text-t2kTeal sm:mt-5 text-lg sm:max-w-md sm:mx-auto md:text-xl lg:mx-0 font-semibold text-left cursor-pointer text-balance'
+                onClick={() => handleConfettiLaunch()}
+                type='button'
+              >
+                {count > 4
+                  ? `🇯🇲 ${saying} 🇯🇲`
+                  : 'Congrats to Kami for winning the competition! 🎉'}
+              </button>
+            ) : null}
+            <p className='my-4 text-gray-500 text-lg sm:max-w-md sm:mx-auto md:text-xl lg:mx-0 text-balance'>
               {isSessionOver()
-                ? 'Thanks for competing in the Train to Kain Fitness Competition. See you in Jamaica! 🇯🇲'
+                ? `Thanks for competing in the Train to Kain Fitness Competition. See ya in Jamaica! 🇯🇲`
                 : signedIn
                 ? `Welcome back, ${user.firstName}! Your current score is ${
                     user.totalScore
@@ -47,7 +156,6 @@ const Home = () => {
                 </span>
               ) : null}
             </p>
-
             <div className='mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start'>
               <div className='rounded-md shadow'>
                 {signedIn ? (
@@ -82,9 +190,7 @@ const Home = () => {
               width={350}
               placeholder='blur'
               className={`duration-700 ease-in-out rounded-lg ${
-                loading
-                  ? 'scale-110 blur-2xl grayscale'
-                  : 'scale-100 blur-0 grayscale-0'
+                loading ? 'blur-2xl grayscale' : 'blur-0 grayscale-0'
               }`}
               onLoadingComplete={() => setLoading(false)}
               src={cassieRyanBoat}
